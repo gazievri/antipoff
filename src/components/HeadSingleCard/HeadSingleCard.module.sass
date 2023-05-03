@@ -1,0 +1,35 @@
+@import "../../styles/@mixins"
+
+.headSingleCard
+    display: flex
+    gap: 32px
+    margin-left: 80px
+
+.btnBack
+    color: #F8F8F8
+    border: 1px solid #F8F8F8
+    border-radius: 8px
+    width: 81px
+    height: 38px
+    @include btn-title
+    margin-top: -7px
+
+.avatar
+    width: 187px
+    height: 187px
+    border-radius: 50%
+    object-fit: cover
+
+.textBlock
+    display: flex
+    flex-direction: column
+    gap: 16px
+    justify-content: center
+
+.name
+    color: #FFFFFF
+    @include heading-h1
+
+.position
+    color: #FFFFFF
+    @include position
