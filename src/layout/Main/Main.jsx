@@ -1,6 +1,8 @@
 import {Routes, Route} from 'react-router-dom'
 import { CardsPage } from '../../pages/CardsPage'
 import { CardPage } from '../../pages/CardPage';
+import { LoginPage } from '../../pages/LoginPage';
+import { SignUpPage } from '../../pages/SIgnUpPage';
 
 export const Main = () => {
   return (
@@ -8,7 +10,8 @@ export const Main = () => {
       <Routes>
         <Route path="/" element={<CardsPage />} />
         <Route exact path="/:id" element={<CardPage />} />
-        {/* <Route exact path="/offerta" element={<Offerta />} /> */}
+        <Route exact path="/sign-in" element={<LoginPage />} />
+        <Route exact path="/sign-up" element={<SignUpPage />} />
       </Routes>
     </main>
   );

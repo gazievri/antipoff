@@ -9,6 +9,15 @@ export const getCards = () => {
   }).then(checkResponse)
 };
 
+export const getUser = (id) => {
+  return fetch(`${BASE_URL}/api/users/${id}`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  }).then(checkResponse)
+};
+
 export const checkResponse = (response) => {
   return response.ok
     ? response.json()
