@@ -1,7 +1,7 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const cardSlice = createSlice({
-  name: "card",
+  name: 'card',
   initialState: {
     data: {},
   },
@@ -10,7 +10,6 @@ const cardSlice = createSlice({
     setCardData(state, action) {
       state.data = action.payload;
     },
-
   },
 });
 

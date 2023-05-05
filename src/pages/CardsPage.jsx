@@ -1,13 +1,15 @@
 import { HeadSection } from '../components/HeadSection/HeadSection';
 import { HeadCards } from '../components/HeadCards/HeadCards';
 import { Cards } from '../components/Cards/Cards';
-import { getCards } from '../utils/api';
 import { useEffect, useState } from 'react';
 import { useMediaQuery } from '../utils/useMediaQuery';
+import { useSelector } from 'react-redux';
 
 export const CardsPage = () => {
+  const cardsData = useSelector((state) => state.cards.data);
+
   // Массив с данными карточек с сервера
-  const [persons, setPersons] = useState([]);
+  const [persons, setPersons] = useState(cardsData);
   // Количество карточек для отображения на странице
   const [cardsPerPage, setCardsPerPage] = useState(8);
   // Массив с данными карточек для отображения на странице
@@ -19,12 +21,8 @@ export const CardsPage = () => {
 
   // При загрузки страницы делаем запрос на сервер для получения данных для карточек
   useEffect(() => {
-    getCards()
-      .then((res) => {
-        setPersons(res.data);
-      })
-      .catch((err) => console.log(err));
-  }, []);
+    setPersons(cardsData);
+  }, [cardsData]);
 
   // Определяем ширину экрана и устанавливаем маркер для мобильного телефона
   useEffect(() => {

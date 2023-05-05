@@ -1,0 +1,64 @@
+@import "../../styles/@mixins"
+
+.cardText
+    max-width: 1064px
+    display: flex
+    gap: 131px
+    margin: 49px auto 0
+
+.paragraphs
+    display: flex
+    flex-direction: column
+    gap: 30px
+    @include text
+    max-width: 630px
+
+.contacts
+    display: flex
+    flex-direction: column
+    gap: 30.5px
+    @include text
+
+.link
+    display: flex
+    gap: 10px
+    align-items: center
+    transition: 0.3s
+
+.link:hover
+    scale: 1.03
+
+.phoneIcon
+    width: 22px
+    height: 22px
+    background-image: url('../../assets/icons/phone.svg')
+    background-repeat: no-repeat
+
+.envelopeIcon
+    width: 22px
+    height: 16px
+    background-image: url('../../assets/icons/envelope.svg')
+    background-repeat: no-repeat
+
+@media screen and (max-width: 1224px)
+    .cardText
+        margin: 49px 0 0
+        padding: 0 0 0 80px
+
+@media screen and (max-width: 1120px)
+    .cardText
+        padding: 0 80px
+        
+@media screen and (max-width: 900px)
+    .cardText
+        flex-direction: column-reverse
+        gap: 34px
+        margin: 33px auto 32px
+
+    .contacts
+        gap: 25px
+
+@media screen and (max-width: 550px)
+    .cardText
+        padding: 0 16px
+
