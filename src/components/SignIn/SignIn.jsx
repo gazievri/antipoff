@@ -25,8 +25,8 @@ export const SignIn = () => {
       .then((res) => {
         dispatch(setLoggedIn());
         dispatch(setToken(res.token));
-        localStorage.setItem('token', res.token)
-        localStorage.setItem('logged', true)
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('logged', true);
         navigate('/');
         event.target.reset();
         reset();

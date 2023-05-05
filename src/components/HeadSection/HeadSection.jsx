@@ -2,6 +2,7 @@ import { useDispatch } from 'react-redux';
 import styles from './HeadSection.module.sass';
 import { setLoggedOut, deleteToken } from '../../store/authSlice';
 import { useMediaQuery } from '../../utils/useMediaQuery';
+import PropTypes from 'prop-types';
 
 export const HeadSection = (props) => {
   const dispatch = useDispatch();
@@ -18,8 +19,6 @@ export const HeadSection = (props) => {
     dispatch(setLoggedOut());
     //Удаляем Token из Store
     dispatch(deleteToken());
-    // //Удаляем Cards из Store
-    // dispatch(setCardsData([]));
   };
 
   return (
@@ -38,3 +37,7 @@ export const HeadSection = (props) => {
     </section>
   );
 };
+
+HeadSection.propTypes = {
+  children: PropTypes.element
+}

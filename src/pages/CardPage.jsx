@@ -13,6 +13,7 @@ export const CardPage = () => {
   );
   const cardsData = useSelector((state) => state.cards.data);
 
+  // Нахожу данные карточки по id для отображения данных при перезагрузки страницы
   useEffect(() => {
     if (cardsData.length > 0) {
       const id = pathname.split('/')[1];

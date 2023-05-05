@@ -1,8 +1,8 @@
 import styles from './CardText.module.sass';
+import PropTypes from 'prop-types';
 import { PARAGRAPHS } from '../../utils/constants';
 
 export const CardText = ({ email }) => {
-
   return (
     <section className={styles.cardText}>
       <div className={styles.paragraphs}>
@@ -34,3 +34,7 @@ export const CardText = ({ email }) => {
     </section>
   );
 };
+
+CardText.propTypes = {
+  email: PropTypes.string,
+}

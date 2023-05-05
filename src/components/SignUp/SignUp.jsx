@@ -1,7 +1,7 @@
 import styles from './SignUp.module.sass';
 import { useForm } from 'react-hook-form';
 import { emailRegExp } from '../../utils/regExp';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { registerUser } from '../../utils/api';
 import { useDispatch } from 'react-redux';
 import { setLoggedIn, setToken } from '../../store/authSlice';
@@ -20,13 +20,13 @@ export const SignUp = () => {
 
   const onSubmit = (data, event) => {
     event.preventDefault();
-    console.log(data)
+    console.log(data);
     registerUser(data.email, data.password)
       .then((res) => {
         console.log(res);
 
-        dispatch(setLoggedIn())
-        dispatch(setToken(res.token))
+        dispatch(setLoggedIn());
+        dispatch(setToken(res.token));
 
         event.target.reset();
         reset();

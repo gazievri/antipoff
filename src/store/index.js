@@ -7,6 +7,6 @@ export default configureStore({
   reducer: {
     card: cardReducer,
     cards: cardsReducer,
-    auth: authSlice
+    auth: authSlice,
   },
 });
