@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { login } from '../../utils/api';
 import { useDispatch } from 'react-redux';
 import { setLoggedIn, setToken } from '../../store/authSlice';
+import { useState } from 'react';
 
 export const SignIn = () => {
   const {
@@ -15,6 +16,8 @@ export const SignIn = () => {
   } = useForm({
     mode: 'all',
   });
+
+  const [isPassHidden, setIsPassHidden] = useState(true)
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,6 +36,11 @@ export const SignIn = () => {
       })
       .catch((err) => console.log(err));
   };
+
+  // Обработчик клика по кнопке Показать пароль
+  const handleShowPass = () => {
+    setIsPassHidden(!isPassHidden)
+  }
 
   return (
     <section className={styles.sigin}>
@@ -68,7 +76,7 @@ export const SignIn = () => {
           <input
             className={errors.password ? styles.inputError : styles.input}
             id="passowrd"
-            type="password"
+            type={isPassHidden ? 'password' : 'text'}
             maxLength="30"
             {...register('password', {
               required: 'Обязательное поле',
@@ -78,6 +86,7 @@ export const SignIn = () => {
               },
             })}
           />
+          <button className={styles.showPass} type="button" onClick={handleShowPass} />
           {errors.password && (
             <p role="alert" className={styles.error}>
               {errors.password?.message}

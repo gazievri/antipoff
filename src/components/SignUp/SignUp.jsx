@@ -1,37 +1,46 @@
 import styles from './SignUp.module.sass';
 import { useForm } from 'react-hook-form';
 import { emailRegExp } from '../../utils/regExp';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { registerUser } from '../../utils/api';
 import { useDispatch } from 'react-redux';
 import { setLoggedIn, setToken } from '../../store/authSlice';
+import { useState } from 'react';
 
 export const SignUp = () => {
   const {
     register,
     handleSubmit,
     reset,
+    watch,
     formState: { errors, isValid },
   } = useForm({
     mode: 'all',
   });
 
+  const [isPassHidden, setIsPassHidden] = useState(true);
+
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const onSubmit = (data, event) => {
     event.preventDefault();
-    console.log(data);
     registerUser(data.email, data.password)
       .then((res) => {
-        console.log(res);
-
         dispatch(setLoggedIn());
         dispatch(setToken(res.token));
-
+        localStorage.setItem('token', res.token);
+        localStorage.setItem('logged', true);
+        navigate('/');
         event.target.reset();
         reset();
       })
       .catch((err) => console.log(err));
+  };
+
+  // Обработчик клика по кнопке Показать пароль
+  const handleShowPass = () => {
+    setIsPassHidden(!isPassHidden);
   };
 
   return (
@@ -90,7 +99,7 @@ export const SignUp = () => {
           <input
             className={errors.password ? styles.inputError : styles.input}
             id="passowrd"
-            type="password"
+            type={isPassHidden ? 'password' : 'text'}
             maxLength="30"
             {...register('password', {
               required: 'Обязательное поле',
@@ -99,6 +108,11 @@ export const SignUp = () => {
                 message: 'Не менее 8 символов',
               },
             })}
+          />
+          <button
+            className={styles.showPass}
+            type="button"
+            onClick={handleShowPass}
           />
           {errors.password && (
             <p role="alert" className={styles.error}>
@@ -112,7 +126,7 @@ export const SignUp = () => {
           <input
             className={errors.confirmation ? styles.inputError : styles.input}
             id="confirmation"
-            type="password"
+            type={isPassHidden ? 'password' : 'text'}
             maxLength="30"
             {...register('confirmation', {
               required: 'Обязательное поле',
@@ -120,7 +134,17 @@ export const SignUp = () => {
                 value: 8,
                 message: 'Не менее 8 символов',
               },
+              validate: (val) => {
+                if (watch('password') != val) {
+                  return 'Пароли не совпадают';
+                }
+              },
             })}
+          />
+          <button
+            className={styles.showPass}
+            type="button"
+            onClick={handleShowPass}
           />
           {errors.confirmation && (
             <p role="alert" className={styles.error}>
