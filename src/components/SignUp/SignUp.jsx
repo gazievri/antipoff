@@ -2,6 +2,9 @@ import styles from './SignUp.module.sass';
 import { useForm } from 'react-hook-form';
 import { emailRegExp } from '../../utils/regExp';
 import { useNavigate, Link } from 'react-router-dom';
+import { registerUser } from '../../utils/api';
+import { useDispatch } from 'react-redux';
+import { setLoggedIn, setToken } from '../../store/authSlice';
 
 export const SignUp = () => {
   const {
@@ -13,14 +16,27 @@ export const SignUp = () => {
     mode: 'all',
   });
 
+  const dispatch = useDispatch();
+
   const onSubmit = (data, event) => {
-    event.preventDefault()
-    console.log(data);
+    event.preventDefault();
+    console.log(data)
+    registerUser(data.email, data.password)
+      .then((res) => {
+        console.log(res);
+
+        dispatch(setLoggedIn())
+        dispatch(setToken(res.token))
+
+        event.target.reset();
+        reset();
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
     <section className={styles.signup}>
-      <form action="" className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
         <h1 className={styles.title}>Регистрация</h1>
         <label htmlFor="name" className={styles.lable}>
           <span>Имя</span>
@@ -117,7 +133,10 @@ export const SignUp = () => {
           Зарегистрироваться
         </button>
         <span className={styles.span}>
-          Уже зарегистрированы? <Link to="/sign-in" className={styles.link}>Войти</Link>{' '}
+          Уже зарегистрированы?{' '}
+          <Link to="/sign-in" className={styles.link}>
+            Войти
+          </Link>{' '}
         </span>
       </form>
     </section>

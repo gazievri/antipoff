@@ -13,22 +13,22 @@ export const CardPage = () => {
   );
   const cardsData = useSelector((state) => state.cards.data);
 
-  console.log(cardData, '777')
-
   useEffect(() => {
-    if (cardsData.length >= 0) {
+    if (cardsData.length > 0) {
       const id = pathname.split('/')[1];
       const card = cardsData.filter((el) => el.id == id)[0];
       setCardData(card);
     }
-  }, []);
+  }, [cardsData, pathname]);
 
   return (
     <>
-      <HeadSection>
-        <HeadSingleCard data={cardData} />
-      </HeadSection>
-      <CardText email={cardData.email} />
+      <>
+        <HeadSection>
+          <HeadSingleCard data={cardData} />
+        </HeadSection>
+        <CardText email={cardData.email} />
+      </>
     </>
   );
 };

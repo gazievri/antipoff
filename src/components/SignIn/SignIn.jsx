@@ -1,7 +1,10 @@
 import styles from './SignIn.module.sass';
 import { useForm } from 'react-hook-form';
 import { emailRegExp } from '../../utils/regExp';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { login } from '../../utils/api';
+import { useDispatch } from 'react-redux';
+import { setLoggedIn, setToken } from '../../store/authSlice';
 
 export const SignIn = () => {
   const {
@@ -13,11 +16,22 @@ export const SignIn = () => {
     mode: 'all',
   });
 
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const onSubmit = (data, event) => {
     event.preventDefault();
-    console.log(data);
+    login(data.email, data.password)
+      .then((res) => {
+        dispatch(setLoggedIn());
+        dispatch(setToken(res.token));
+        localStorage.setItem('token', res.token)
+        localStorage.setItem('logged', true)
+        navigate('/');
+        event.target.reset();
+        reset();
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -75,7 +89,10 @@ export const SignIn = () => {
           Войти
         </button>
         <span className={styles.span}>
-          Еще не зарегистрированы? <Link to="/sign-up" className={styles.link}>Регистрация</Link>{' '}
+          Еще не зарегистрированы?{' '}
+          <Link to="/sign-up" className={styles.link}>
+            Регистрация
+          </Link>{' '}
         </span>
       </form>
     </section>

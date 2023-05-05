@@ -3,7 +3,6 @@
 .headSingleCard
     display: flex
     gap: 32px
-    margin-left: 80px
 
 .btnBack
     color: #F8F8F8
@@ -16,6 +15,18 @@
     transition: 0.3s
 
 .btnBack:hover
+    scale: 1.03
+
+.btnTablet
+    position: absolute
+    width: 7px
+    height: 14px
+    background-image: url('../../assets/icons/back-mobile.svg')
+    background-repeat: no-repeat
+    top: 25px
+    left: 80px
+
+.btnTablet:hover
     scale: 1.03
 
 .avatar
@@ -37,3 +48,32 @@
 .position
     color: #FFFFFF
     @include position
+
+@media screen and (max-width: 1005px)
+    .name
+        font-size: 48px
+
+    .position
+        font-size: 26px
+
+@media screen and (max-width: 900px)
+    .headSingleCard
+        flex-direction: column-reverse
+        gap: 16px
+        margin: 0 auto
+        padding: 64px 0
+        align-items: center
+
+    .name
+        font-size: 36px
+        line-height: 42px
+
+    .position
+        font-size: 20px
+        line-height: 23px
+        text-align: center
+
+@media screen and (max-width: 550px)
+    .btnTablet
+        left: 33px
+

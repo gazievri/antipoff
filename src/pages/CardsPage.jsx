@@ -6,7 +6,6 @@ import { useMediaQuery } from '../utils/useMediaQuery';
 import { useSelector } from 'react-redux';
 
 export const CardsPage = () => {
-
   const cardsData = useSelector((state) => state.cards.data);
 
   // Массив с данными карточек с сервера

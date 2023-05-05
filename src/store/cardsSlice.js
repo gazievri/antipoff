@@ -1,17 +1,15 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
 const cardsSlice = createSlice({
-  name: "cards",
+  name: 'cards',
   initialState: {
     data: [],
   },
 
   reducers: {
     setCardsData(state, action) {
-      console.log( action.payload)
       state.data = action.payload;
     },
-
   },
 });
 
