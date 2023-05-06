@@ -2,7 +2,7 @@ import './styles/@globals.sass';
 import { Main } from './layout/Main/Main';
 import { useEffect, useState } from 'react';
 import { getCards } from './utils/api';
-import { useDispatch} from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setCardsData } from './store/cardsSlice';
 import { setLoggedIn } from './store/authSlice';
 
@@ -39,11 +39,7 @@ function App() {
     }
   }, []);
 
-  return (
-    <>
-      <Main />
-    </>
-  );
+  return <Main />;
 }
 
 export default App;
